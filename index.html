@@ -34,18 +34,18 @@
 
   <body class="bg-black text-white">
     <!-- Navbar -->
-    <header class="absolute top-0 left-0 w-full z-20 bg-black/40">
+    <header class="absolute top-0 left-0 w-full z-20 bg-black">
       <nav
         class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
       >
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-1">
           <img
             src="./assets/images/logo.png"
             alt="BigB Logo"
-            class="w-[75px] h-auto"
+            class="w-[85px] h-auto"
           />
-          <span class="text-yellow-400 font-semibold text-lg"
-            >BIGB BOAT SERVICE</span
+          <span class="font-semibold text-lg text-[#F1D30C] relative top-2"
+            >BOAT SERVICE</span
           >
         </div>
         <!-- <ul class="hidden md:flex space-x-8 text-sm font-medium">
@@ -81,10 +81,12 @@
         </a>
         <br />
         <div class="mt-4" id="contact-numbers">
-          <span class="text-gray-100 mr-3" id="phone-1"
-            >contact: 98 4747 2027
-          </span>
-          <span class="text-gray-100" id="phone-2"> 80 864 88880</span>
+          <a id="phone-1" class="text-gray-100 mr-3" href="tel:+919847472027"
+            >Call: 98 4747 2027</a
+          >
+          <a id="phone-2" class="text-gray-100" href="tel:+918086488880"
+            >80 8648 8880</a
+          >
         </div>
       </div>
     </section>
@@ -124,14 +126,14 @@
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-400 text-sm py-6 text-center">
-      © 2025
+      © 2026
       <span class="text-yellow-400 font-semibold">BigB Boat Service</span> |
       Akalapuzha, Kerala
     </footer>
 
     <!-- Floating WhatsApp Button -->
     <a
-      href="https://wa.me/9847472027"
+      href="https://wa.me/919847472027"
       target="_blank"
       class="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg hover:scale-110 transition wa-link"
     >
@@ -142,9 +144,10 @@
     <script>
       (function () {
         // keep both raw digits (for links) and formatted display (with spaces)
+        // raw values include country code (India = 91) for wa.me links; display keeps spaced formatting
         const numbers = [
-          { raw: "9847472027", display: "98 4747 2027" },
-          { raw: "8086488880", display: "80 864 88880" },
+          { raw: "919847472027", display: "98 4747 2027" },
+          { raw: "918086488880", display: "80 8648 8880" },
         ];
         const phone1El = document.getElementById("phone-1");
         const phone2El = document.getElementById("phone-2");
@@ -161,9 +164,14 @@
 
         const order = sessionOrder === "0" ? [0, 1] : [1, 0];
 
-        if (phone1El)
-          phone1El.textContent = "contact: " + numbers[order[0]].display;
-        if (phone2El) phone2El.textContent = numbers[order[1]].display;
+        if (phone1El) {
+          phone1El.textContent = "Call: " + numbers[order[0]].display;
+          phone1El.setAttribute("href", "tel:+" + numbers[order[0]].raw);
+        }
+        if (phone2El) {
+          phone2El.textContent = numbers[order[1]].display;
+          phone2El.setAttribute("href", "tel:+" + numbers[order[1]].raw);
+        }
 
         // Update all WhatsApp links to use the primary (first) number shown (raw digits)
         const primaryRaw = numbers[order[0]].raw;
